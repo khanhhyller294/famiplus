@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>FamiPlus - Management Website</title>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="m">
+            <a href="#"><i class="fa-solid fa-bars"></i></a>
+            <a href="#"><img src="/images/logo.png" width="100%"></a>
+        </div>
+        <input class="search-bar" placeholder="Search...">
+        <div class="icons">
+          <a href="#"><i class="fa-regular fa-file"></i></a> 
+          <a href="#"><i class="fa-regular fa-envelope"></i></a> 
+          <a href="#"><i class="fa-regular fa-bell" ></i></a> 
+          <a href="#"><i class="fa-regular fa-bookmark" ></i></a>
+          <a href="#"><i class="fa-regular fa-user" ></i></a> 
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Menu</h3>
+        <a href="/" ><i class="fa-solid fa-house"></i>&nbsp; Home</a>
+        <a href="/create-account"><i class="fa-solid fa-pen-to-square"></i>&nbsp; Creating New Account</a>
+        <a href="#"><i class="fa-solid fa-book-open"></i>&nbsp; Account Management</a>
+        <a href="#"><i class="fa-solid fa-code-fork"></i>&nbsp; Permission Management</a>
+        <a href="#"><i class="fa-solid fa-star"></i>&nbsp; Folder Management</a>
+        <a href="#"><i class="fa-solid fa-bullseye"></i>&nbsp; Deactivated Account Management</a>
+        <a href="#"><i class="fa-solid fa-chart-pie"></i>&nbsp; Reports</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <div class="logo">
+            <img id="an" src="/images/famiplus.png">
+            <div class="text">
+                <h1>FAMIPLUS</h1>
+                <h4>Management Website</h4> 
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content">
+            <form id="createAccountForm" action="/create-account" method="POST">
+                <h1>Creating New Account</h1>  
+                <h4>Account Information Form</h4>
+                <div class="container">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input placeholder="Nguyen Van A..." type="text" id="fullName" name="username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input placeholder="...famiplus@gmail.com" type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" id="password" name="password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="position">Specific Job Position</label>
+                        <input placeholder="Leader of Financial..." type="text" id="position" name="position" required>
+                    </div>
+
+                    <div class="role-level">
+                        <h4>Role Level</h4>
+                        <label><input type="checkbox" name="role" value="Leadership Member"> Leadership Member</label>
+                        <label><input type="checkbox" name="role" value="Department Head"> Department Head</label>
+                        <label><input type="checkbox" name="role" value="Control Department Member"> Control Department Member</label>
+                        <label><input type="checkbox" name="role" value="Dedicated Archival Staff"> Dedicated Archival Staff</label>
+                    </div>
+
+                    <button type="submit" class="create-btn">CREATE</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,245 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #f4f4f4;
+}
+.header {
+    background-color: #46cf91;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.header .m a i {
+    font-size: 30px; /* Kích thước của menu icon */
+    color: #ffffff; /* Màu của menu icon giống các icon khác */
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect */
+.header .m a:hover i {
+    transform: scale(1.1); /* Phóng to nhẹ khi hover */
+}
+.header .m img {
+    width: 50px; /* Điều chỉnh kích thước logo */
+    height: auto; /* Đảm bảo tỷ lệ khung hình được giữ nguyên */
+}
+.search-bar {
+    width: 30%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    transform: translateX(-35%);
+}
+.icons {
+    display: flex;
+    justify-content: flex-end;  /* Điều chỉnh các icon nằm về bên phải */
+    width: auto;
+    gap: 25px;  /* Giảm khoảng cách giữa các icon */
+    align-items: center;
+}
+
+.icons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 12px;  /* Thêm padding để tạo khoảng cách giữa các biểu tượng */
+    transition: transform 0.3s ease;
+}
+
+.icons i {
+    font-size: 22px;  /* Kích thước icon */
+    color: #ffffff;   /* Màu sắc icon */
+}
+
+.icons a:hover i {
+    transform: scale(1.1);  /* Hiệu ứng phóng to khi hover */
+}
+
+.m {
+padding-right:10px;
+}
+
+
+.content {
+    padding: 0px 50px 50px 300px; /* Add padding for header and sidebar */
+    flex-grow: 1;
+}
+.content h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.projects {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Thêm khoảng cách giữa các mục */
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-bottom: 1px solid #ddd; /* Thêm đường viền dưới mỗi mục */
+}
+
+.project-item:hover {
+    background-color: #e8f5e9;
+    transform: translateY(-5px);
+}
+
+.project-item i {
+    margin-right: 15px;
+}
+
+.project-item span {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Project Title Styling */
+.project-item i {
+    font-size: 18px;
+    color: #46cf91; /* Màu của biểu tượng thư mục */
+}
+
+.project-item span {
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+}
+.sidebar {
+    z-index: 2;
+    width: 250px;
+    background-color: #ffffff;
+    color: rgb(8, 1, 46);
+    position: fixed;
+    top: 60px; /* Below the header */
+    bottom: 0;
+    padding: 20px;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+}
+.sidebar h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    color: rgb(11, 1, 41);
+    text-decoration: none;
+    display: block;
+    padding: 10px ;
+}
+.sidebar a {
+    color: rgb(11, 1, 41);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    margin: 10px 0;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.sidebar a:hover {
+    background-color: #a1c8f0;
+    border-radius: 5px;
+}
+
+.sidebar a i {
+    margin-right: 15px;
+    font-size: 24px;
+}
+
+.text{
+display: absolute;
+top: 50%; /* Căn giữa theo chiều dọc */
+left: 50%;
+}
+.main {
+    margin-top: 80px; /* Đảm bảo không bị che khuất bởi header */
+    padding-left: 270px; /* Đảm bảo không bị che khuất bởi sidebar */
+    padding: 20px;
+    flex-grow: 1;
+}
+#an{
+    width: 1398px;
+    height: 210px;
+    z-index:0;
+}
+.container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+h2 {
+    text-align: center;
+}
+.form-group {
+    margin: 10px 0;
+}
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.role-level {
+    margin: 10px 0;
+}
+.role-level label {
+    display: block;
+    margin: 5px 0;
+}
+.create-btn {
+    background-color: #032644; /* Màu đen nhạt */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto; /* Đặt chiều rộng tự động */
+    display: block; /* Để căn trái */
+    margin-top: 3%;
+    float: right ; 
+}
+.create-btn:hover {
+    background-color: #020c14; 
+}
+.permissions {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    min-height: 100px;
+}
+label{
+    font-size: 12px;
+}
+.notification {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+}
