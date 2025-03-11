@@ -48,46 +48,112 @@
         </div>
 
         <!-- Content Section -->
-        <div class="content">
-            <form id="createAccountForm" action="/create-account" method="POST">
-                <h1>Creating New Account</h1>  
-                <h4>Account Information Form</h4>
+        <div class="content"> 
+            <form id="createAccountForm">
+                <h1>Creating New Account </h1>  
                 <div class="container">
+                    <h4 style="text-align: center;">Account Information Form</h4>
+                    
                     <div class="form-group">
-                        <label for="fullName">Full Name</label>
-                        <input placeholder="Nguyen Van A..." type="text" id="fullName" name="username" required>
+                        <label for="username">Full Name</label>
+                        <input placeholder="Nguyen Van A..." type="text" id="username" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input placeholder="...famiplus@gmail.com" type="email" id="email" name="email" required>
+                        <input placeholder="...famiplus@gmail.com" type="email" id="email" required>
+                        <span id="emailError" class="error-message"></span> <!-- Error message for email -->
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="text" id="password" name="password" required>
+                        <input placeholder="Enter password" type="password" id="password" required>
+                        <span id="passwordError" class="error-message"></span> <!-- Error message for password -->
                     </div>
-                    
+
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" required>
+                    </div>
+
                     <div class="form-group">
                         <label for="position">Specific Job Position</label>
-                        <input placeholder="Leader of Financial..." type="text" id="position" name="position" required>
+                        <input placeholder="Leader of financial..." type="text" id="position" required>
                     </div>
 
                     <div class="role-level">
                         <h4>Role Level</h4>
-                        <label><input type="checkbox" name="role" value="Leadership Member"> Leadership Member</label>
-                        <label><input type="checkbox" name="role" value="Department Head"> Department Head</label>
-                        <label><input type="checkbox" name="role" value="Control Department Member"> Control Department Member</label>
-                        <label><input type="checkbox" name="role" value="Dedicated Archival Staff"> Dedicated Archival Staff</label>
+                        <label><input type="checkbox" name="role" onclick="restrictCheckboxes(this)" value="Leadership Member"> Leadership Member</label>
+                        <label><input type="checkbox" name="role" onclick="restrictCheckboxes(this)" value="Department Head"> Department Head</label>
+                        <label><input type="checkbox" name="role" onclick="restrictCheckboxes(this)" value="Control Department Member"> Control Department Member</label>
+                        <label><input type="checkbox" name="role" onclick="restrictCheckboxes(this)" value="Dedicated Archival Staff"> Dedicated Archival Staff</label>
                     </div>
 
-                    <button type="submit" class="create-btn">CREATE</button>
+                    <label for="Permission">Pre-configured permissions for the selected level</label>
+                    <div class="permissions"></div>
+                    <button type='submit' class="create-btn">CREATE</button>
                 </div>
             </form>
+            <div class="notification" id="notification"></div>
         </div>
         
     </div>
+    
+    <script>
+        function restrictCheckboxes(checkbox) {
+            const checkboxes = document.querySelectorAll('input[name="role"]');
+            checkboxes.forEach((cb) => {
+                if (cb !== checkbox) {
+                    cb.checked = false;
+                }
+            });
+        };
 
+        document.getElementById('createAccountForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            // Get form data
+            var username = document.getElementById('username').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var dob = document.getElementById('dob').value;
+            let selectedCheckbox = document.querySelector('input[name="role"]:checked');
+            let position = selectedCheckbox ? selectedCheckbox.value : "No role selected";
+
+            // Validate email and password
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;  // At least 6 characters and one number
+            if (!emailPattern.test(email)) {
+                alert('Invalid email format.');
+                return;
+            }
+            if (!passwordPattern.test(password)) {
+                alert('Password must be at least 6 characters long and contain a number.');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:4000/create-account', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, email, password, position, dob }),
+                });
+
+                const data = await response.json();
+                var notification = document.getElementById('notification');
+                notification.textContent = data.message + ' and assigned role: ' + position + '.';
+                notification.style.display = 'block';
+
+                alert('The account has successfully been created with the position: ' + position);
+            } catch (error) {
+                console.error('Error:', error);
+                var notification = document.getElementById('notification');
+                notification.textContent = 'Error: ' + error.message;
+                notification.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
-
