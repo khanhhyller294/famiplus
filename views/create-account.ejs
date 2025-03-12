@@ -74,6 +74,7 @@
                     <div class="form-group">
                         <label for="dob">Date of Birth</label>
                         <input type="date" id="dob" required>
+                        <span id="dobError" class="error-message"></span> <!-- Error message for date of birth -->
                     </div>
 
                     <div class="form-group">
@@ -109,6 +110,31 @@
             });
         };
 
+        // Validate email format
+        function validateEmail(email) {
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailPattern.test(email);
+        }
+
+        // Validate password format
+        function validatePassword(password) {
+            // Password must be at least 6 characters and contain at least one letter and one number
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+            return passwordPattern.test(password);
+        }
+
+        // Check if the user is at least 18 years old
+        function validateAge(dob) {
+            const birthDate = new Date(dob);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age >= 18;
+        }
+
         document.getElementById('createAccountForm').addEventListener('submit', async function(event) {
             event.preventDefault();
 
@@ -121,15 +147,25 @@
             let position = selectedCheckbox ? selectedCheckbox.value : "No role selected";
 
             // Validate email and password
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;  // At least 6 characters and one number
-            if (!emailPattern.test(email)) {
-                alert('Invalid email format.');
+            if (!validateEmail(email)) {
+                document.getElementById('emailError').textContent = 'Invalid email format.';
                 return;
+            } else {
+                document.getElementById('emailError').textContent = '';
             }
-            if (!passwordPattern.test(password)) {
-                alert('Password must be at least 6 characters long and contain a number.');
+
+            if (!validatePassword(password)) {
+                document.getElementById('passwordError').textContent = 'Password must be at least 6 characters long and contain both letters and numbers.';
                 return;
+            } else {
+                document.getElementById('passwordError').textContent = '';
+            }
+
+            if (!validateAge(dob)) {
+                document.getElementById('dobError').textContent = 'You must be at least 18 years old.';
+                return;
+            } else {
+                document.getElementById('dobError').textContent = '';
             }
 
             try {
